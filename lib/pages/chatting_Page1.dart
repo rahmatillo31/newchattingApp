@@ -1,9 +1,11 @@
-import 'package:chatting_zone/chatting/chat_service.dart';
-import 'package:chatting_zone/components/Text_Field1.dart';
-import 'package:chatting_zone/components/chat_babble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../chatting/chat_service.dart';
+import '../components/Text_Field1.dart';
+import '../components/chat_babble.dart';
 
 class Chatting_page extends StatefulWidget {
   final String reciverUserEmail;
@@ -20,11 +22,14 @@ class _Chatting_pageState extends State<Chatting_page> {
   final TextEditingController txtController = TextEditingController();
   final ChatService _chatService = ChatService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
 
   void sendMessage() async {
     //only send message if there is something to send
     if (txtController.text.isNotEmpty) {
-      await _chatService.sendMessage(widget.reciverUserID, txtController.text);
+      await _chatService.sendMessage(
+          widget.reciverUserID, txtController.text);
       //clear the text controller after sending the message
       txtController.clear();
     }
@@ -32,20 +37,25 @@ class _Chatting_pageState extends State<Chatting_page> {
 
   @override
   Widget build(BuildContext context) {
+    print("test");
+    print(_firestore.collection("chat_rooms").doc("GJ9QMMG3GlY8m4BnU0YB5FTiRII3"));
+    
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.reciverUserEmail),
+        backgroundColor: Colors.teal,
       ),
+      backgroundColor: Colors.grey[400],
       body: Column(
         children: [
           //message
-
           Expanded(child: _buildMessageList()),
           //user input
           _buildMessageInput(),
-
-
-          SizedBox(height: 25,)
+          SizedBox(
+            height: 25.h,
+          ),
         ],
       ),
     );
@@ -57,6 +67,9 @@ class _Chatting_pageState extends State<Chatting_page> {
         stream: _chatService.getMessage(
             widget.reciverUserID, _firebaseAuth.currentUser!.uid),
         builder: (context, snapshot) {
+
+          // print("SNAP:${snapshot.data!.docs[0]}");
+
           if (snapshot.hasError) {
             Text('Error${snapshot.error}');
           }
@@ -83,7 +96,7 @@ class _Chatting_pageState extends State<Chatting_page> {
     return Container(
       alignment: alignment,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.0.w),
         child: Column(
           crossAxisAlignment:
               (data['senderId'] == _firebaseAuth.currentUser!.uid)
@@ -94,11 +107,11 @@ class _Chatting_pageState extends State<Chatting_page> {
                   ? MainAxisAlignment.end
                   : MainAxisAlignment.start,
           children: [
-            Text(data['senderEmsil']),
+            Text(data['senderEmail']),
             SizedBox(
-              height: 5,
+              height: 5.h,
             ),
-            ChatBabble(message: data['message'])
+            ChatBabble(message: data['message']),
           ],
         ),
       ),
@@ -106,28 +119,28 @@ class _Chatting_pageState extends State<Chatting_page> {
   }
 
 //building message input
-
   Widget _buildMessageInput() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      padding:  EdgeInsets.symmetric(horizontal: 25.0.h),
       child: Row(
         children: [
           //textfield
           Expanded(
             child: MyTextField(
-                controller: txtController,
-                hintText: "Enter Message",
-                ObscureText: false),
+              controller: txtController,
+              hintText: "Enter Message",
+              ObscureText: false,
+            ),
           ),
-
           //sendbuttom
-          IconButton(onPressed: sendMessage, icon: Icon(Icons.send_rounded)),
+          IconButton(
+              onPressed: sendMessage,
+              icon: Icon(
+                Icons.send_rounded,
+                size: 40.r,
+              )),
         ],
       ),
     );
   }
 }
-
-//build message list
-
-//build message item

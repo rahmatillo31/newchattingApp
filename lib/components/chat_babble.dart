@@ -10,10 +10,10 @@ class ChatBabble extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(9), color: Colors.teal),
+          borderRadius: BorderRadius.circular(10), color: Colors.teal),
       child: Text(
         message,
-        style: TextStyle(fontSize: 16, color: Colors.white),
+        style: TextStyle(fontSize: 16, color: Colors.black),
       ),
     );
   }

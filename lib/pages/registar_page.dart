@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../components/My_Buttom.dart';
@@ -44,29 +45,32 @@ class _Register_pageState extends State<Register_page> {
       backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          padding:  EdgeInsets.symmetric(horizontal: 25.0.w),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(
-                  height: 150,
+                  height: 80.h,
                 ),
                 //logo
                 Icon(
                   Icons.chat_sharp,
-                  size: 110,
+                  size: 110.r,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 //Text
                 Text(
-                  "Let's create an account for you",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600,color: Colors.grey),
+                  "Welcome back to chatting zone",
+                  style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey),
                   //textfield
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 MyTextField(
                     controller: Emailcontroller,
@@ -82,23 +86,23 @@ class _Register_pageState extends State<Register_page> {
                     hintText: "Coniform Password",
                     ObscureText: true),
                 SizedBox(
-                  height: 25,
+                  height: 25.h,
                 ),
                 //bottom sign up
                 My_bottom1(onTap: signUp, text: "Sign Up"),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Already a Member? ",
+                      "Not a Member ",
                       style: TextStyle(color: Colors.grey),
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 5.h,
                     ),
                     GestureDetector(
                       onTap: widget.ontap,

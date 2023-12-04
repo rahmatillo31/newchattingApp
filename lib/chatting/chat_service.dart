@@ -19,8 +19,8 @@ class ChatService extends ChangeNotifier {
         senderId: currentUserId,
         senderEmail: currentUserEmail,
         reciverId: receicerId,
-        message: message,
-        timestamp: timestamp);
+        timestamp: timestamp,
+      message: message,);
 
 
     // main brain
@@ -40,6 +40,7 @@ class ChatService extends ChangeNotifier {
     List<String> ids = [userId, otherUserId];
     ids.sort();
     String chatRoomId = ids.join("_");
+    print(chatRoomId);
 
     return _firestore
         .collection('chat_rooms')
@@ -49,21 +50,3 @@ class ChatService extends ChangeNotifier {
         .snapshots();
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

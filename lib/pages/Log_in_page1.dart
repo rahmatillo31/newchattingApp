@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../components/My_Buttom.dart';
 import '../components/Text_Field1.dart';
 import '../servises/Auth_Servise.dart';
@@ -44,69 +43,72 @@ class _Log_inPState extends State<Log_inP> {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 180,
-                ),
-                //logo
-                Icon(
-                  Icons.chat_sharp,
-                  size: 110,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                //Text
-                Text(
-                  "Let's Create Account",
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey),
-                  //textfield
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                MyTextField(
-                    controller: Emailcontroller,
-                    hintText: "Email",
-                    ObscureText: false),
-                MyTextField(
-                    controller: PassWordcontroller,
-                    hintText: "Password",
-                    ObscureText: true),
-                SizedBox(
-                  height: 25,
-                ),
-                //bottom
-                My_bottom1(onTap: signIn, text: "sign in"),
-                SizedBox(
-                  height: 10,
-                ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 30,
+                  ),
+                  //logo
+                  Icon(
+                    Icons.chat_sharp,
+                    size: 110,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  //Text
+                  Text(
+                    "Let's Create Account",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey),
+                    //textfield
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  MyTextField(
+                      controller: Emailcontroller,
+                      hintText: "Email",
+                      ObscureText: false),
+                  MyTextField(
+                      controller: PassWordcontroller,
+                      hintText: "Password",
+                      ObscureText: true),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  //bottom
+                  My_bottom1(onTap: signIn, text: "sign in"),
+                  SizedBox(
+                    height: 10,
+                  ),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Not a Member",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    GestureDetector(
-                      onTap: widget.ontap,
-                      child: Text(
-                        "Registar now",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black87),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Already a Member?",
+                        style: TextStyle(color: Colors.grey),
                       ),
-                    )
-                  ],
-                ),
-              ],
+                      SizedBox(
+                        height: 5,
+                      ),
+                      GestureDetector(
+                        onTap: widget.ontap,
+                        child: Text(
+                          "Registar now",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

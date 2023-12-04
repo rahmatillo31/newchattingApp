@@ -9,12 +9,7 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(ChangeNotifierProvider(
-      create: (context) => AuthService(),
-      child: ChangeNotifierProvider(
-        create: (context) => AuthService(),
-        child: MyApp(),
-      )));
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -27,22 +22,28 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(360, 690),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (_, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'First Method',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
+    return ChangeNotifierProvider(
+        create: (context) => AuthService(),
+        child: ChangeNotifierProvider(
+          create: (context) => AuthService(),
+          child: ScreenUtilInit(
+            designSize: const Size(360, 690),
+            minTextAdapt: true,
+            splitScreenMode: true,
+            builder: (_, child) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'First Method',
+                theme: ThemeData(
+                  primarySwatch: Colors.blue,
+                  textTheme:
+                      Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
+                ),
+                home: child,
+              );
+            },
+            child: const AuthGate(title: 'First Method'),
           ),
-          home: child,
-        );
-      },
-      child: const AuthGate(title: 'First Method'),
-    );
+        ));
   }
 }
